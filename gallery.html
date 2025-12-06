@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Greggy Deramas - My Gallery</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  :root {
+    --dark-grey: #2C2F36; /* Main background color */
+    --bright-green: #22C55E; /* Accent green */
+    --white-text: #FFFFFF;
+    --light-grey-text: #E0E0E0;
+    --section-bg: #1D1F29; /* Background for content area */
+  }
+
+  /* --- BASE STYLES --- */
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--dark-grey);
+    color: var(--white-text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 0 2rem 2rem 2rem;
+    box-sizing: border-box;
+  }
+  
+  /* --- CUSTOM GLOW & WAVE ANIMATION --- */
+  .glow-text {
+    text-shadow: 
+      0 0 5px var(--bright-green), 
+      0 0 10px var(--bright-green), 
+      0 0 20px rgba(34, 197, 94, 0.5); 
+  }
+
+  @keyframes wave-in {
+    0% { 
+      transform: translateX(-100%);
+      opacity: 0; 
+    }
+    100% { 
+      transform: translateX(0);
+      opacity: 1; 
+    }
+  }
+
+  /* --- NAVIGATION BAR STYLES --- */
+  .navbar {
+    display:flex;
+    justify-content: center;
+    background-color: var(--section-bg); 
+    padding: 1rem;
+    margin-bottom: 3rem;
+    border-bottom: 2px solid rgba(34, 197, 94, 0.4); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  .navbar a {
+    text-decoration: none;
+  }
+  .navbar button {
+    background-color: transparent;
+    border: 2px solid var(--bright-green); 
+    color: var(--bright-green); 
+    margin: 0 1rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: all 0.3s ease-in-out;
+    font-weight: 600;
+    text-shadow: 0 0 4px var(--bright-green); 
+  }
+  .navbar button.active, .navbar button:hover {
+    background-color: var(--bright-green); 
+    color: #000; 
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.7); 
+    text-shadow: none; 
+  }
+
+  /* --- MAIN CONTENT STYLES --- */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-grow: 1;
+    background-color: var(--section-bg); 
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  h1 {
+    margin: 0 0 3rem 0;
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: var(--bright-green); 
+    text-align: center;
+    animation: wave-in 1.5s ease-out forwards;
+  }
+
+  /* --- GALLERY GRID LAYOUT (3 COLUMNS ENFORCED) --- */
+  .gallery-grid {
+    display: grid;
+    /* Default to 1 column for very small screens, 2 for medium, etc. */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 20px; /* Reduced gap slightly to fit the look */
+    padding: 25px;
+    background-color: #1A1F29; /* Slightly darker background for the grid */
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Enforce 3 columns specifically on screens wider than 800px */
+  @media (min-width: 800px) { 
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr 1fr; /* Exactly 3 equal columns */
+    }
+  }
+  
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    transition: all 0.4s ease-in-out;
+    /* Styles for the distinct green border/frame */
+    border: 3px solid var(--bright-green); 
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5); /* Initial glow */
+  }
+
+  .gallery-item:hover {
+    transform: scale(1.03); /* Slight zoom on hover */
+    box-shadow: 0 0 25px var(--bright-green); /* Stronger glow on hover */
+    z-index: 10;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    /* Set a height that makes the image containers square-ish or consistent, as shown in the image */
+    height: 200px; 
+    display: block;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.1);
+  }
+
+  /* Hide captions if you don't want them, but keeping the hover effect here */
+  .image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    color: var(--white-text);
+    padding: 10px;
+    font-size: 0.9em;
+    font-weight: 600;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+    box-sizing: border-box;
+  }
+
+  .gallery-item:hover .image-caption {
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <a href="index.html"><button>Home</button></a>
+  <a href="autobiography.html"><button>My Autobiography</button></a>
+  <a href="song.html"><button>Song</button></a>
+  <a href="gallery.html"><button class="active">My Gallery</button></a>
+  <a href="video.html"><button>My Video</button></a>
+</div>
+
+<main>
+
+  <h1 class="glow-text">MY GALLERY</h1>
+
+  <div class="gallery-grid">
+    
+    <div class="gallery-item">
+      <img src="galleryimage01.jpg" alt="Person sitting near the water">
+      <div class="image-caption">Nak picture ka dyan</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage02.jpg" alt="Relaxing View">
+      <div class="image-caption">Relaxing View</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage03.jpg" alt="Gym mirror shot">
+      <div class="image-caption">Gym mirror shot</div>
+    </div>
+    
+    <div class="gallery-item">
+      <img src="galleryimage04.jpg" alt="BIT 2-AC">
+      <div class="image-caption">BIT 2-AC</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage05.jpg" alt="with Meladzkiee">
+      <div class="image-caption">with Meladzkiee</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage06.jpg" alt="BIT 1-C">
+      <div class="image-caption">BIT 1-C</div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="galleryimage07.jpg" alt="Miniature of MPC">
+        <div class="image-caption">Miniature of MPC</div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="galleryimage08.jpg" alt="City Lights">
+        <div class="image-caption">City Lights</div>
+    </div>
+    
+    <div class="gallery-item">
+      <img src="galleryimage09.jpg" alt="Landscape of Eagle">
+      <div class="image-caption">Landscape of Eagle</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage10.jpg" alt="Cheat Day: Pizza">
+      <div class="image-caption">Cheat Day: Pizza</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage11.jpg" alt="OJT na Solar Boy">
+      <div class="image-caption">OJT na Solar Boy</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage12.jpg" alt="Chicken Breast na lasang lupa">
+      <div class="image-caption">Chicken Breast na lasang lupa</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage13.jpg" alt="Pagod yan">
+      <div class="image-caption">Pagod yan</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage14.jpg" alt="Uhaw lang?">
+      <div class="image-caption">Uhaw lang?</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage15.jpg" alt="Parang Tukmol lang">
+      <div class="image-caption">Parang Tukmol lang</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage16.jpg" alt="Ito ang trip">
+      <div class="image-caption">Ito ang trip</div>
+    </div>
+    
+    <div class="gallery-item">
+      <img src="galleryimage17.jpg" alt="Meeting with Sir">
+      <div class="image-caption">Meeting with Sir</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage18.jpg" alt="Pagupit na??">
+      <div class="image-caption">Pagupit na??</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage19.jpg" alt="with Coach Dar">
+      <div class="image-caption">with Coach Dar</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage20.jpg" alt="Mga hindi ko kakilala ;>">
+      <div class="image-caption">Mga hindi ko kakilala ;></div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage21.jpg" alt="Wala nagbago (˶˃ ᵕ ˂˶)">
+      <div class="image-caption">Wala nagbago (˶˃ ᵕ ˂˶)</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage22.jpg" alt="Before ma-stress sa acads">
+      <div class="image-caption">Before ma-stress sa acads</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage23.jpg" alt="Practice huhuhu">
+      <div class="image-caption">Practice huhuhu</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage24.jpg" alt="Yummy">
+      <div class="image-caption">Yummy</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage25.jpg" alt="Grind last 2022">
+      <div class="image-caption">Grind last 2022</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage26.jpg" alt="Robinson Antipolo">
+      <div class="image-caption">Robinson Antipolo</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage27.jpg" alt="2019 pa to ah">
+      <div class="image-caption">2019 pa to ah</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage28.jpg" alt="with Pinaka kupal">
+      <div class="image-caption">with Pinaka kupal</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage29.jpg" alt="Syrel the chickboi">
+      <div class="image-caption">Syrel the chickboi</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galleryimage30.jpg" alt="Masaya pa to">
+      <div class="image-caption">Masaya pa to</div>
+    </div>
+
+   
+  </div>
+
+</main>
+
+</body>
+</html>

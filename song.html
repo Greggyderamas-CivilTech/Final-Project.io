@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Greggy Deramas - Song List</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --dark-grey: #2C2F36; /* Main background color */
+    --bright-green: #22C55E; /* Accent green */
+    --white-text: #FFFFFF;
+    --light-grey-text: #E0E0E0;
+    --section-bg: #1D1F29; /* Background for content area */
+  }
+
+  /* --- BASE STYLES --- */
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--dark-grey);
+    color: var(--white-text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 0 2rem 2rem 2rem;
+    box-sizing: border-box;
+  }
+  
+  /* --- CUSTOM GLOW & WAVE ANIMATION --- */
+  .glow-text {
+    /* Base text shadow for the glow effect */
+    text-shadow: 
+      0 0 5px var(--bright-green), 
+      0 0 10px var(--bright-green), 
+      0 0 20px rgba(34, 197, 94, 0.5); /* Wider, softer shadow */
+  }
+
+  @keyframes wave-in {
+    0% { 
+      transform: translateX(-100%);
+      opacity: 0; 
+    }
+    100% { 
+      transform: translateX(0);
+      opacity: 1; 
+    }
+  }
+  
+  /* --- NAVIGATION BAR STYLES --- */
+  .navbar {
+    display:flex;
+    justify-content: center;
+    background-color: var(--section-bg); 
+    padding: 1rem;
+    margin-bottom: 3rem;
+    border-bottom: 2px solid rgba(34, 197, 94, 0.4); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  .navbar a {
+    text-decoration: none;
+  }
+  .navbar button {
+    background-color: transparent;
+    border: 2px solid var(--bright-green); 
+    color: var(--bright-green); 
+    margin: 0 1rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: all 0.3s ease-in-out;
+    font-weight: 600;
+    text-shadow: 0 0 4px var(--bright-green); 
+  }
+  .navbar button.active, .navbar button:hover {
+    background-color: var(--bright-green); 
+    color: #000; 
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.7); 
+    text-shadow: none; 
+  }
+
+  /* --- MAIN CONTENT STYLES --- */
+  main {
+    max-width: 1000px; /* Increased max-width to accommodate wider players */
+    margin: 0 auto 3rem auto;
+    padding: 2rem;
+    flex-grow: 1;
+    background-color: var(--section-bg); 
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  h1 {
+    margin: 0 0 3rem 0;
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: var(--bright-green); 
+    text-align: center;
+    animation: wave-in 1.5s ease-out forwards;
+  }
+
+  .artist-section {
+    margin-bottom: 4rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    background-color: #1A1F29; /* Slightly darker background for the section */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  .artist-section h2 {
+    margin: 0 0 2rem 0;
+    color: var(--bright-green);
+    font-size: 1.8rem;
+    text-align: center;
+    border-bottom: 2px solid rgba(34, 197, 94, 0.5);
+    padding-bottom: 0.5rem;
+    text-shadow: 0 0 8px var(--bright-green); /* Section title glow */
+  }
+  
+  /* --- SONG ENTRY LAYOUT (Custom 500px width, 380px height, responsive embeds) --- */
+  .song-entry {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    margin-bottom: 3rem; 
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+  }
+  .song-entry:last-child {
+    border-bottom: none; 
+  }
+  
+  .song-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .song-title {
+    color: var(--white-text);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 1.5em; 
+    text-align: center;
+    text-shadow: 0 0 5px rgba(34, 197, 94, 0.3); 
+  }
+  
+  .spotify-embed {
+    width: 100%;
+    /* Max width set to the requested 500px */
+    max-width: 500px; 
+    margin: 0 auto; 
+  }
+  
+  /* Set fixed height for the standard large Spotify widget style (380px) */
+  .spotify-embed iframe {
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); 
+      width: 100%; /* Ensures responsiveness within the max-width container */
+      height: 380px; /* Height set to 380px */
+      border: none;
+      transition: box-shadow 0.3s ease;
+  }
+  .spotify-embed iframe:hover {
+      box-shadow: 0 0 20px var(--bright-green); /* Green hover glow */
+  }
+
+  /* Responsive adjustment for larger screens (optional, keeps it centralized) */
+  @media (min-width: 700px) {
+    .song-entry {
+      padding: 2rem 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- FIXED NAVIGATION (Song is active) -->
+<div class="navbar">
+  <a href="index.html"><button>Home</button></a>
+  <a href="autobiography.html"><button>My Autobiography</button></a>
+  <a href="song.html"><button class="active">Song</button></a>
+  <a href="gallery.html"><button>My Gallery</button></a>
+  <a href="video.html"><button>My Video</button></a>
+</div>
+
+<main>
+
+  <h1 class="glow-text">TRACK LIST</h1>
+
+  <section class="artist-section">
+    <h2>Ed Sheeran</h2>
+    
+    <div class="song-entry">
+      <div class="song-details">
+        <div class="song-title">Thinking Out Loud</div>
+        <div class="spotify-embed">
+          <!-- Player height set to 380px -->
+          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/34gCuhDGsG4bRPIf9bb02f?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="song-entry">
+      <div class="song-details">
+        <div class="song-title">Perfect</div>
+        <div class="spotify-embed">
+          <!-- Player height set to 380px -->
+          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/0tgVpDi06FyKpA1z0VMD4v?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="artist-section">
+    <h2>Mozart</h2>
+    
+    <div class="song-entry">
+      <div class="song-details">
+        <div class="song-title">Molto Allegro</div>
+        <div class="spotify-embed">
+          <!-- Player height set to 380px -->
+          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6OC0v9yU90ME5DW2o1skKr?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="song-entry">
+      <div class="song-details">
+        <div class="song-title">Lacrimosa</div>
+        <div class="spotify-embed">
+          <!-- Player height set to 380px -->
+          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3oHSL6pt9LpNrQZuQGu9wL?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="artist-section">
+    <h2>Justin Bieber</h2>
+
+    <div class="song-entry">
+      <div class="song-details">
+        <div class="song-title">Love Yourself</div>
+        <div class="spotify-embed">
+          <!-- Player height set to 380px -->
+          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/50kpGaPAhYJ3sGmk6vplg0?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   <section class="artist-section">
+    <h2>Shamrock</h2> 
+
+    <div class="song-entry">
+      <div class="song-details">
+        <div class="song-title">Alipin</div>
+        <div class="spotify-embed">
+          <!-- Player height set to 380px -->
+          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3KhjY6JxrGo6ii77SbILG7?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="artist-section">
+    <h2>Maki</h2>
+    
+    <div class="song-entry">
+      <div class="song-details">
+        <div class="song-title">Kailan?</div>
+        <div class="spotify-embed">
+          <!-- Player height set to 380px -->
+          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3AmeIjZbXzy8qCeoFpWzzS?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+ </section>
+
+<section class="artist-section">
+    <h2>Cup of Joe</h2>
+
+    <div class="song-entry">
+      <div class="song-details">
+        <div class="song-title">Multo</div>
+        <div class="spotify-embed">
+          <!-- Player height set to 380px -->
+          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/4cBm8rv2B5BJWU2pDaHVbF?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

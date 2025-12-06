@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Greggy Deramas - My Videos</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --dark-grey: #2C2F36; /* Main background color */
+    --bright-green: #22C55E; /* Accent green */
+    --white-text: #FFFFFF;
+    --light-grey-text: #E0E0E0;
+    --section-bg: #1D1F29; /* Background for content area */
+  }
+
+  /* --- BASE STYLES --- */
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--dark-grey);
+    color: var(--white-text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 0 2rem 2rem 2rem;
+    box-sizing: border-box;
+  }
+  
+  /* --- CUSTOM GLOW & WAVE ANIMATION --- */
+  .glow-text {
+    text-shadow: 
+      0 0 5px var(--bright-green), 
+      0 0 10px var(--bright-green), 
+      0 0 20px rgba(34, 197, 94, 0.5); 
+  }
+
+  @keyframes wave-in {
+    0% { 
+      transform: translateX(-100%);
+      opacity: 0; 
+    }
+    100% { 
+      transform: translateX(0);
+      opacity: 1; 
+    }
+  }
+
+  /* --- NAVIGATION BAR STYLES --- */
+  .navbar {
+    display:flex;
+    justify-content: center;
+    background-color: var(--section-bg); 
+    padding: 1rem;
+    margin-bottom: 3rem;
+    border-bottom: 2px solid rgba(34, 197, 94, 0.4); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  .navbar a {
+    text-decoration: none;
+  }
+  .navbar button {
+    background-color: transparent;
+    border: 2px solid var(--bright-green); 
+    color: var(--bright-green); 
+    margin: 0 1rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: all 0.3s ease-in-out;
+    font-weight: 600;
+    text-shadow: 0 0 4px var(--bright-green); 
+  }
+  .navbar button.active, .navbar button:hover {
+    background-color: var(--bright-green); 
+    color: #000; 
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.7); 
+    text-shadow: none; 
+  }
+
+  /* --- MAIN CONTENT STYLES --- */
+  main {
+    max-width: 900px;
+    margin: 0 auto 3rem auto;
+    padding: 2rem;
+    flex-grow: 1;
+    background-color: var(--section-bg); 
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  h1 {
+    margin: 0 0 3rem 0;
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: var(--bright-green); 
+    text-align: center;
+    animation: wave-in 1.5s ease-out forwards;
+  }
+
+  /* --- VIDEO EMBED STYLES --- */
+  .video-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .video-item {
+    padding-bottom: 20px;
+    border-bottom: 1px dashed rgba(34, 197, 94, 0.5);
+  }
+  .video-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .video-title {
+    color: var(--white-text);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 5px rgba(34, 197, 94, 0.5);
+  }
+
+  .video-responsive {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 3px solid var(--bright-green);
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.8); /* Strong glow around the video player */
+    transition: box-shadow 0.3s ease;
+  }
+  .video-responsive:hover {
+    box-shadow: 0 0 25px var(--bright-green);
+  }
+
+  .video-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <a href="index.html"><button>Home</button></a>
+  <a href="autobiography.html"><button>My Autobiography</button></a>
+  <a href="song.html"><button>Song</button></a>
+  <a href="gallery.html"><button>My Gallery</button></a>
+  <a href="video.html"><button class="active">My Video</button></a>
+</div>
+
+<main>
+
+  <h1 class="glow-text">VIDEO LIST</h1>
+
+  <div class="video-list">
+    
+   <div class="video-item">
+      <div class="video-title">Autocad Tutorial: House</div>
+      <div class="video-responsive">
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/c4dIlVvy_yU?si=e0hBVbH9KLrbFVxl&amp;start=5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="video-item">
+      <div class="video-title">Vlog: Civil Engineer</div>
+      <div class="video-responsive">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/4vKygvyNHwc?si=4lKSWUIBFCTcQQPq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="video-item">
+      <div class="video-title">COC Gaming Tutorial</div>
+      <div class="video-responsive">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/CcFRPIeHpgg?si=Pc4TIZRz9XqNvd5E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="video-item">
+      <div class="video-title">Simple Build a House</div>
+      <div class="video-responsive">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/ZZt5DAdUxuI?si=zBbrqWAA8TKho5fc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+</body>
+</html>
